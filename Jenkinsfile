@@ -20,5 +20,20 @@ pipeline {
         sh './jenkins/scripts/test.sh'
       }
     }
+    stage('Deploy') {
+      steps {
+        sh './jenkins/scripts/deliver.sh'
+      }
+    }
+    stage('Wait') {
+      steps {
+        input 'Finished?'
+      }
+    }
+    stage('Kill') {
+      steps {
+        sh './jenkins/scripts/kill.sh'
+      }
+    }
   }
 }
